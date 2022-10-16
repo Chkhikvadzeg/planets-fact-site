@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import backgroundImg from '../assets/background-stars.svg';
 
 export default function AboutPlanet({ currentPlanet, color }) {
   const { name, rotation, revolution, radius, temperature } = currentPlanet;
@@ -22,10 +21,6 @@ export default function AboutPlanet({ currentPlanet, color }) {
 
 const Wrapper = styled.div`
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  background-image: url(${backgroundImg});
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
 `;
 
 const AboutPlanetContainer = styled.div`
