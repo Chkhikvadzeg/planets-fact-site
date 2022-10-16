@@ -40,6 +40,24 @@ export default function AboutPlanet({ currentPlanet, color }) {
             </InfoItemsDesktop>
           </Details>
         </ImageAndDescription>
+        <Stats>
+          <Stat>
+            <span>Rotation Time</span>
+            <span>{rotation}</span>
+          </Stat>
+          <Stat>
+            <span>Revolution Time</span>
+            <span>{revolution}</span>
+          </Stat>
+          <Stat>
+            <span>Radius</span>
+            <span>{radius}</span>
+          </Stat>
+          <Stat>
+            <span>Average temp.</span>
+            <span>{temperature}</span>
+          </Stat>
+        </Stats>
       </AboutPlanetContainer>
     </>
   )
@@ -263,6 +281,80 @@ const InfoItemDesktop = styled(InfoItem)`
     : 'background-color: rgba(216, 216, 216, 0.2); border-color: rgba(216, 216, 216, 0.2);'};
         
         
+    }
+  }
+`;
+
+const Stats = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 60px;
+
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media screen and (min-width: 1024px) {
+    gap: 30px;
+  }
+`;
+
+const Stat = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  span:first-child {
+    font-weight: 700;
+    font-size: 8px;
+    line-height: 16px;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  span:last-child {
+    font-family: 'Antonio';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+    letter-spacing: -0.75px;
+    text-transform: uppercase;
+  }
+
+  @media screen and (min-width: 768px) {
+    padding: 16px;
+    padding-bottom: 20px;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+
+    span:last-child {
+      font-size: 24px;
+      line-height: 31px;
+      letter-spacing: -0.9px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    padding: 24px;
+    padding-bottom: 28px;
+
+    span:first-child {
+      font-size: 11px;
+      line-height: 25px;
+      letter-spacing: 1px;
+    }
+
+    span:last-child {
+      font-size: 40px;
+      line-height: 52px;
+      letter-spacing: -1.5px;
     }
   }
 `;
