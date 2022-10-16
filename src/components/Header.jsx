@@ -3,8 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import ChevronIcon from '../assets/icon-chevron.svg'
 
-const Header = ({ planets, currentPlanet }) => {
-  const colors = ['#DEF4FC', '#F7CC7F', '#545BFE', '#FF6A45', '#ECAD7A', '#FCCB6B', '#65F0D5', '#497EFA'];
+const Header = ({ planets, currentPlanet, colors }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <Wrapper>
@@ -16,7 +15,7 @@ const Header = ({ planets, currentPlanet }) => {
         <Menu isMenuOpen={isMenuOpen}>
           {planets.map((planet, index) => {
             return (
-              <PlanetItem isPlanet={currentPlanet === planet.name} color={colors[index]} to={`/${planet.name}`} key={planet.name}>
+              <PlanetItem onClick={() => setIsMenuOpen(false)} isPlanet={currentPlanet === planet.name} color={colors[index]} to={`/${planet.name}`} key={planet.name}>
                 <div>
                   <Circle color={colors[index]} />
                   <h3>{planet.name}</h3>
@@ -50,7 +49,7 @@ const StyledHeader = styled.header`
   }
 
   @media screen and (min-width: 1024px) {
-    padding: 24px 40px 24px 32px;
+    padding: 0 40px 0 32px;
     flex-direction: row;
     justify-content: space-between;
   }
@@ -70,6 +69,7 @@ const StyledLink = styled(Link)`
     font-weight: 400;
     white-space: nowrap;
   }
+
   `
 
 const Svg = styled.svg`
@@ -155,11 +155,12 @@ const PlanetItem = styled(Link)`
   @media screen and (min-width: 1024px) {
     color: ${props => props.isPlanet ? '#fff' : 'rgba(255, 255, 255, 0.5)'};
     position: relative;
+    padding: 24px 0;
 
     &:after {
       content: '';
       position: absolute;
-      top: -30px;
+      top: 0px;
       left: 0;
       height: 4px;
       opacity: ${props => props.isPlanet ? '1' : '0'};
