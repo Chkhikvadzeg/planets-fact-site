@@ -4,7 +4,7 @@ export default function Home({ planets }) {
 
   return (
     <>
-      <Header planets={planets} />
+      <Header currentPlanet='Mercury' planets={planets} />
     </>
   )
 }

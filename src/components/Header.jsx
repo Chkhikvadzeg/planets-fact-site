@@ -3,39 +3,46 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import ChevronIcon from '../assets/icon-chevron.svg'
 
-const Header = ({ planets }) => {
+const Header = ({ planets, currentPlanet }) => {
   const colors = ['#DEF4FC', '#F7CC7F', '#545BFE', '#FF6A45', '#ECAD7A', '#FCCB6B', '#65F0D5', '#497EFA'];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <StyledHeader>
-      <StyledLink to='/'>
-        <h1>THE PLANETS</h1>
-      </StyledLink>
-      <Svg onClick={() => setIsMenuOpen(prev => !prev)} xmlns="http://www.w3.org/2000/svg" width="24" height="17"><g fill={`${isMenuOpen ? 'rgba(255,255,255,0.5)' : '#FFFFFF'}`} fillRule="evenodd"><path d="M0 0h24v3H0zM0 7h24v3H0zM0 14h24v3H0z" /></g></Svg>
-      <Menu isMenuOpen={isMenuOpen}>
-        {planets.map((planet, index) => {
-          return (
-            <PlanetItem color={colors[index]} to={planet.name} key={planet.name}>
-              <div>
-                <Circle color={colors[index]} />
-                <h3>{planet.name}</h3>
-              </div>
-              <img src={ChevronIcon} alt="chevron" />
-            </PlanetItem>
-          )
-        })}
-      </Menu>
-    </StyledHeader>
+    <Wrapper>
+      <StyledHeader>
+        <StyledLink to='/'>
+          <h1>THE PLANETS</h1>
+        </StyledLink>
+        <Svg onClick={() => setIsMenuOpen(prev => !prev)} xmlns="http://www.w3.org/2000/svg" width="24" height="17"><g fill={`${isMenuOpen ? 'rgba(255,255,255,0.5)' : '#FFFFFF'}`} fillRule="evenodd"><path d="M0 0h24v3H0zM0 7h24v3H0zM0 14h24v3H0z" /></g></Svg>
+        <Menu isMenuOpen={isMenuOpen}>
+          {planets.map((planet, index) => {
+            return (
+              <PlanetItem isPlanet={currentPlanet === planet.name} color={colors[index]} to={`/${planet.name}`} key={planet.name}>
+                <div>
+                  <Circle color={colors[index]} />
+                  <h3>{planet.name}</h3>
+                </div>
+                <img src={ChevronIcon} alt="chevron" />
+              </PlanetItem>
+            )
+          })}
+        </Menu>
+      </StyledHeader >
+    </Wrapper >
   );
 }
+
+const Wrapper = styled.div`
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+`
 
 const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
 
   @media screen and (min-width: 768px) {
     padding: 32px 48px;
@@ -115,7 +122,7 @@ const PlanetItem = styled(Link)`
   justify-content: space-between;
   padding: 20px 0;
   text-decoration: none;
-  color: #fff;
+  color: ${props => !props.isPlanet ? '#fff' : 'rgba(255, 255, 255, 0.5)'};
   font-weight: 700;
   font-size: 15px;
   line-height: 25px;
@@ -146,7 +153,7 @@ const PlanetItem = styled(Link)`
   }
 
   @media screen and (min-width: 1024px) {
-    color: rgba(255, 255, 255, 0.75);
+    color: ${props => props.isPlanet ? '#fff' : 'rgba(255, 255, 255, 0.5)'};
     position: relative;
 
     &:after {
@@ -155,8 +162,8 @@ const PlanetItem = styled(Link)`
       top: -30px;
       left: 0;
       height: 4px;
-      opacity: 0;
-      width: 0;
+      opacity: ${props => props.isPlanet ? '1' : '0'};
+      width: ${props => props.isPlanet ? '100%' : '0'};
       background: ${props => props.color};
       transition: width 0.3s ease-in-out, opacity 0.1s ease-in-out;
     }
