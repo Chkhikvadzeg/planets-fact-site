@@ -96,9 +96,9 @@ const Menu = styled.div`
   transform: ${props => props.isMenuOpen ? 'translateX(0)' : 'translateX(-100%)'};
   
   @media screen and (min-width: 768px) {
+    transform: translateX(0);
     position: static;
     transition: none;
-    transform: translateX(0);
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
